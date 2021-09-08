@@ -1,6 +1,6 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:mbocu_app/routes/binding/splashscreen_binding.dart';
-import 'package:mbocu_app/views/home_page.dart';
+import 'package:mbocu_app/views/home/home_container.dart';
 import 'package:mbocu_app/views/login_page.dart';
 import 'package:mbocu_app/views/register_page.dart';
 import 'package:mbocu_app/views/splashscreen_page.dart';
@@ -28,7 +28,7 @@ class Routes {
     ),
     GetPage(
       name: '/home',
-      page: () => HomePage(),
+      page: () => HomeContainer(),
       binding: HomeBinding(),
     ),
   ];
