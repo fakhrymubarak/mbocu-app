@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mini_project/theme.dart';
+import 'package:mbocu_app/themes/text_styles.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key key}) : super(key: key);
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -18,7 +18,7 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             Text(
               'Log In',
-              style: signUp,
+              style: tsRegular,
             ),
             SizedBox(
               height: 30,
@@ -77,13 +77,7 @@ class _LoginPageState extends State<LoginPage> {
 
 class TextFieldContainer extends StatelessWidget {
   final Widget child;
-  const TextFieldContainer({Key key, this.child}) : super(key: key);
-  // const BoxShadow({
-  //   Color color = const Color(oxffFFCA61),
-  //   Offset offset = Offset.zero,
-  //   double blurRadius = 0.0,
-  //   this.spreadRadius = 0.0
-  // }) : super(color: color, offset: offset, blurRadius: blurRadius );
+  const TextFieldContainer({Key? key, required this.child}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

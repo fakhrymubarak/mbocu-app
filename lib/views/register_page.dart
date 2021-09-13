@@ -4,25 +4,23 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_screenutil/screen_util.dart';
-import 'package:mini_project/theme.dart';
+import 'package:mbocu_app/themes/text_styles.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-class UiRegister extends StatefulWidget {
-  const UiRegister({Key key}) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
-  _UiRegisterState createState() => _UiRegisterState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _UiRegisterState extends State<UiRegister> {
+class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(
         BoxConstraints(
             maxWidth: MediaQuery.of(context).size.width,
             maxHeight: MediaQuery.of(context).size.height),
-        allowFontScaling: false,
         designSize: Size(375, 812));
     return ScreenTypeLayout(
       breakpoints: ScreenBreakpoints(desktop: 600, tablet: 950, watch: 300),
@@ -33,7 +31,7 @@ class _UiRegisterState extends State<UiRegister> {
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.only(top: 76.w, right: 90.w, left: 117.w),
-                child: Text('Sign Up', style: signUp),
+                child: Text('Sign Up', style: tsRegular),
               ),
               SizedBox(
                 height: 20.w,
@@ -134,13 +132,7 @@ class _UiRegisterState extends State<UiRegister> {
 
 class TextFieldContainer extends StatelessWidget {
   final Widget child;
-  const TextFieldContainer({Key key, this.child}) : super(key: key);
-  // const BoxShadow({
-  //   Color color = const Color(oxffFFCA61),
-  //   Offset offset = Offset.zero,
-  //   double blurRadius = 0.0,
-  //   this.spreadRadius = 0.0
-  // }) : super(color: color, offset: offset, blurRadius: blurRadius );
+  const TextFieldContainer({Key? key, required this.child}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
