@@ -11,7 +11,7 @@ class ListItemsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 225.h,
+      height: 230.h,
       child: ListView.builder(
         itemCount: listItems.length,
         scrollDirection: Axis.horizontal,
