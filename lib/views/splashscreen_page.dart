@@ -11,12 +11,14 @@ class _SplashscreenPageState extends State<SplashscreenPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text("Hello World!"),
-          ],
+      body: SafeArea(
+        child: Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text("Hello World!"),
+            ],
+          ),
         ),
       ),
     );
