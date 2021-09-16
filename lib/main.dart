@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         initialRoute: '/home',
         initialBinding: HomeBinding(),
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.orange,
         ),
       ),
       designSize: const Size(411, 731),
