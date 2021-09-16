@@ -13,16 +13,38 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final HomeController _controller = Get.find();
+  ScrollController _scrollController = ScrollController();
+  ValueNotifier<int> isAppBarShown = ValueNotifier<int>(0);
+
+  @override
+  void initState() {
+    super.initState();
+    _setupScrollListener();
+  }
+
+  void _setupScrollListener() {
+    double x = 0;
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels > x &&
+          _scrollController.position.pixels > 80.h &&
+          isAppBarShown.value == 0) {
+        isAppBarShown.value = 1;
+      } else if (_scrollController.position.pixels < x &&
+          isAppBarShown.value == 1) {
+        isAppBarShown.value = 0;
+      }
+      x = _scrollController.position.pixels;
+    });
+  }
 
   Widget build(BuildContext context) {
     List<String> list = ["1", "2", "3", "4", "5", "6"];
-    return Container(
-      color: colorWhite,
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            _headerHomePage(),
+    return CustomScrollView(
+      controller: _scrollController,
+      slivers: <Widget>[
+        _headerHomePage(),
+        SliverList(
+          delegate: SliverChildListDelegate([
             SizedBox(height: 16.h),
             _searchBar(),
             SizedBox(height: 16.h),
@@ -32,37 +54,84 @@ class _HomePageState extends State<HomePage> {
             SizedBox(height: 20.h),
             _listItem("Best Seller", list),
             SizedBox(height: 20.h),
-          ],
+          ]),
         ),
-      ),
+      ],
     );
   }
 
   _headerHomePage() {
-    return Stack(
-      children: [
-        Image.asset('assets/images/img_header_bg.png'),
-        Container(
-          margin: EdgeInsets.only(left: 16.w, top: 16.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Image.asset('assets/images/img_logo.png'),
-              SizedBox(
-                height: 28.h,
+    return SliverAppBar(
+      pinned: true,
+      snap: false,
+      floating: false,
+      backgroundColor: colorWhite,
+      expandedHeight: 160.h,
+      flexibleSpace: FlexibleSpaceBar(
+        background: Stack(
+          children: [
+            Container(
+              height: 160.h,
+              width: 411.w,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/volkadot.png'),
+                  fit: BoxFit.cover,
+                ),
+                color: colorPrimary,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(15.w),
+                  bottomRight: Radius.circular(15.w),
+                ),
               ),
-              Text(
-                "Hi, Mbocu User!",
-                style: tsHeading1,
+            ),
+            Container(
+              padding: EdgeInsets.only(left: 16.w, top: 24.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset('assets/images/img_logo.png'),
+                  SizedBox(
+                    height: 28.h,
+                  ),
+                  Text(
+                    "Hi, Mbocu User!",
+                    style: tsHeading1,
+                  ),
+                  TextButton(
+                    child: Text(
+                      "Diantar ke: Linus Pratama Regency",
+                      style: tsHeading2,
+                    ),
+                    onPressed: () => print('Pressed'),
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.only(top: 0, left: 0),
+                    ),
+                  )
+                ],
               ),
-              Text(
-                "Diantar ke: Limus Pratama Regency",
-                style: tsHeading2,
-              )
-            ],
-          ),
+            ),
+          ],
         ),
-      ],
+      ),
+      title: TextButton(
+        child: ValueListenableBuilder(
+          valueListenable: isAppBarShown,
+          builder: (context, value, widget) {
+            return value == 1
+                ? Text(
+              "Diantar ke: Linus Pratama Regency",
+              style: tsHeading2,
+            )
+                : SizedBox();
+          },
+        ),
+        onPressed: () => print('Pressed'),
+        style: TextButton.styleFrom(
+          padding: EdgeInsets.only(top: 0, left: 0),
+        ),
+      ),
+      titleTextStyle: tsHeading2,
     );
   }
 
@@ -81,7 +150,7 @@ class _HomePageState extends State<HomePage> {
             borderSide: BorderSide(color: Colors.transparent, width: 0),
           ),
           contentPadding:
-              EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+          EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
           filled: true,
           fillColor: colorGreyLight,
           hintText: "Search Foods",
