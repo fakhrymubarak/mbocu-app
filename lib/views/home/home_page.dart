@@ -5,6 +5,7 @@ import 'package:mbocu_app/controller/home_controller.dart';
 import 'package:mbocu_app/themes/colors.dart';
 import 'package:mbocu_app/themes/text_styles.dart';
 import 'package:mbocu_app/views/widgets/list_items_widget.dart';
+import 'package:mbocu_app/views/widgets/modal_bottom_sheet_widget.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -30,6 +31,7 @@ class _HomePageState extends State<HomePage> {
           isAppBarShown.value == 0) {
         isAppBarShown.value = 1;
       } else if (_scrollController.position.pixels < x &&
+          _scrollController.position.pixels < 80.h &&
           isAppBarShown.value == 1) {
         isAppBarShown.value = 0;
       }
@@ -66,12 +68,12 @@ class _HomePageState extends State<HomePage> {
       snap: false,
       floating: false,
       backgroundColor: colorWhite,
-      expandedHeight: 160.h,
+      expandedHeight: 150.h,
       flexibleSpace: FlexibleSpaceBar(
         background: Stack(
           children: [
             Container(
-              height: 160.h,
+              height: 150.h,
               width: 411.w,
               decoration: BoxDecoration(
                 image: DecorationImage(
@@ -91,22 +93,18 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Image.asset('assets/images/img_logo.png'),
-                  SizedBox(
-                    height: 28.h,
-                  ),
+                  SizedBox(height: 28.h),
                   Text(
                     "Hi, Mbocu User!",
                     style: tsHeading1,
                   ),
-                  TextButton(
+                  SizedBox(height: 8.h),
+                  InkWell(
                     child: Text(
-                      "Diantar ke: Linus Pratama Regency",
+                      _controller.locationName,
                       style: tsHeading2,
                     ),
-                    onPressed: () => print('Pressed'),
-                    style: TextButton.styleFrom(
-                      padding: EdgeInsets.only(top: 0, left: 0),
-                    ),
+                    onTap: () => displayBottomSheet(context),
                   )
                 ],
               ),
@@ -114,22 +112,28 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      title: TextButton(
+      title: InkWell(
         child: ValueListenableBuilder(
           valueListenable: isAppBarShown,
           builder: (context, value, widget) {
             return value == 1
-                ? Text(
-              "Diantar ke: Linus Pratama Regency",
-              style: tsHeading2,
-            )
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Diantar ke:",
+                        style: tsHeading1,
+                      ),
+                      Text(
+                        _controller.locationName,
+                        style: tsHeading2,
+                      )
+                    ],
+                  )
                 : SizedBox();
           },
         ),
-        onPressed: () => print('Pressed'),
-        style: TextButton.styleFrom(
-          padding: EdgeInsets.only(top: 0, left: 0),
-        ),
+        onTap: () => displayBottomSheet(context),
       ),
       titleTextStyle: tsHeading2,
     );
@@ -150,7 +154,7 @@ class _HomePageState extends State<HomePage> {
             borderSide: BorderSide(color: Colors.transparent, width: 0),
           ),
           contentPadding:
-          EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+              EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
           filled: true,
           fillColor: colorGreyLight,
           hintText: "Search Foods",
