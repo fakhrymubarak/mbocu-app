@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mbocu_app/themes/colors.dart';
+import 'package:mbocu_app/themes/text_styles.dart';
 import 'package:mbocu_app/views/home/cart_page.dart';
 import 'package:mbocu_app/views/home/notification_page.dart';
 import 'package:mbocu_app/views/home/pesanan_page.dart';
@@ -39,6 +40,7 @@ class _HomeContainerState extends State<HomeContainer> {
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: colorBlack,
         unselectedItemColor: colorGreyDark,
+        selectedLabelStyle: tsRegular,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

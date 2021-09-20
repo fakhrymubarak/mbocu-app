@@ -7,19 +7,19 @@ TextStyle tsTitle = GoogleFonts.lato(
     fontSize: 40.sp, fontWeight: FontWeight.w700, color: colorBlack);
 
 TextStyle tsHeading1 = GoogleFonts.lato(
-    fontSize: 20.sp, fontWeight: FontWeight.w700, color: colorBlack);
+    fontSize: 24.sp, fontWeight: FontWeight.w700, color: colorBlack);
 
 TextStyle tsHeading2 = GoogleFonts.lato(
-    fontSize: 15.sp, fontWeight: FontWeight.w600, color: colorBlack);
+    fontSize: 18.sp, fontWeight: FontWeight.w600, color: colorBlack);
 
 TextStyle tsRegular = GoogleFonts.lato(
-    fontSize: 12.sp, fontWeight: FontWeight.w400, color: colorBlack);
+    fontSize: 14.sp, fontWeight: FontWeight.w400, color: colorBlack);
 
 TextStyle tsRegularBold = GoogleFonts.lato(
-    fontSize: 12.sp, fontWeight: FontWeight.w700, color: colorBlack);
+    fontSize: 14.sp, fontWeight: FontWeight.w700, color: colorBlack);
 
 TextStyle tsSmall = GoogleFonts.lato(
-    fontSize: 10.sp, fontWeight: FontWeight.w400, color: colorBlack);
+    fontSize: 12.sp, fontWeight: FontWeight.w400, color: colorBlack);
 
 TextStyle tsSmallBold = GoogleFonts.lato(
-    fontSize: 10.sp, fontWeight: FontWeight.w700, color: colorBlack);
+    fontSize: 12.sp, fontWeight: FontWeight.w700, color: colorBlack);
