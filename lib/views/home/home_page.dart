@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mbocu_app/controller/home_controller.dart';
+import 'package:mbocu_app/models/ItemsByLocationDTO.dart';
 import 'package:mbocu_app/themes/colors.dart';
 import 'package:mbocu_app/themes/text_styles.dart';
+import 'package:mbocu_app/views/widgets/list_item_shimmer.dart';
 import 'package:mbocu_app/views/widgets/list_item_widget.dart';
 import 'package:mbocu_app/views/widgets/modal_bottom_sheet_widget.dart';
+import 'package:mbocu_app/views/widgets/shimmer_box.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -40,24 +43,51 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget build(BuildContext context) {
-    List<String> list = ["1", "2", "3", "4", "5", "6"];
     return CustomScrollView(
       controller: _scrollController,
       slivers: <Widget>[
         _headerHomePage(),
         SliverList(
-          delegate: SliverChildListDelegate([
-            SizedBox(height: 16.h),
-            _searchBar(),
-            SizedBox(height: 16.h),
-            _imgPromoHomePage(),
-            SizedBox(height: 20.h),
-            _listItem("For You", list),
-            SizedBox(height: 20.h),
-            _listItem("Best Seller", list),
-            SizedBox(height: 20.h),
-          ]),
+          delegate: SliverChildListDelegate(
+            [
+              Obx(() => _controller.itemsByLocation.value.data == null
+                  ? _loadingWidgets()
+                  : _successWidgets(_controller.itemsByLocation.value.data))
+            ],
+          ),
         ),
+      ],
+    );
+  }
+
+  _successWidgets(List<FoodItem>? list) {
+    return Column(
+      children: [
+        SizedBox(height: 16.h),
+        _searchBar(),
+        SizedBox(height: 16.h),
+        _imgPromoHomePage(),
+        SizedBox(height: 20.h),
+        _listItem("For You", list),
+        SizedBox(height: 20.h),
+        _listItem("Best Seller", list),
+        SizedBox(height: 20.h),
+      ],
+    );
+  }
+
+  _loadingWidgets() {
+    return Column(
+      children: [
+        SizedBox(height: 16.h),
+        _searchBar(),
+        SizedBox(height: 16.h),
+        showShimmerBox(226.h, 370.w),
+        SizedBox(height: 20.h),
+        ListItemsShimmer(),
+        SizedBox(height: 20.h),
+        ListItemsShimmer(),
+        SizedBox(height: 20.h),
       ],
     );
   }
@@ -101,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(height: 8.h),
                   InkWell(
                     child: Text(
-                      _controller.locationName,
+                      "Diantar ke: " + _controller.locationName,
                       style: tsHeading2,
                     ),
                     onTap: () => displayBottomSheet(context),
@@ -174,7 +204,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  _listItem(String title, List<String> list) {
+  _listItem(String title, List<FoodItem>? list) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [

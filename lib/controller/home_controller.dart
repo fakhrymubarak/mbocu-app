@@ -12,13 +12,13 @@ class HomeController extends GetxController {
   CameraPosition? _kCurrLoc;
 
   MboccuDbApi _mboccuDbApi = MboccuDbApi();
-  Rx<ItemsByLocationDto> _itemsByLocation = new ItemsByLocationDto().obs;
+  Rx<ItemsByLocationDto> itemsByLocation = new ItemsByLocationDto().obs;
 
   @override
-  void onReady() {
+  void onInit() {
     _getCurrentLocation();
     _loadItemsByLocation();
-    super.onReady();
+    super.onInit();
   }
 
   Future<void> _getCurrentLocation() async {
@@ -53,9 +53,8 @@ class HomeController extends GetxController {
 
   Future<void> _loadItemsByLocation() async{
     try {
-      _itemsByLocation.value = await _mboccuDbApi.getItemsByLocation('110.416664', '-6.966667');
-      _itemsByLocation.refresh();
-      print(_itemsByLocation.value.data!.first.name);
+      itemsByLocation.value = await _mboccuDbApi.getItemsByLocation('110.416664', '-6.966667');
+      itemsByLocation.refresh();
     } catch (e) {
       printError(info: e.toString());
     }
