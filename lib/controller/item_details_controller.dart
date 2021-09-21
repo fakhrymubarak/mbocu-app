@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:mbocu_app/models/ItemDetailsDTO.dart';
+import 'package:mbocu_app/repositories/mboccu_db_api.dart';
 
 class ItemDetailsController extends GetxController {
-  String? movieId;
+  String? itemId;
+
+  MboccuDbApi _mboccuDbApi = MboccuDbApi();
+  Rx<ItemDetailsDto> itemDetails = new ItemDetailsDto().obs;
+
 
   @override
   void onReady() {
@@ -14,7 +20,10 @@ class ItemDetailsController extends GetxController {
 
   void _loadItemDetails() async {
     try {
-      movieId = Get.parameters['itemId'];
+      itemId = Get.parameters['itemId'];
+      itemDetails.value = await _mboccuDbApi.getItemDetails(itemId!) ;
+      itemDetails.refresh();
+      print(itemDetails.value.msg);
     } catch (e) {
       _showDialog(title: "Error", middleText: "Cannot load data");
     }

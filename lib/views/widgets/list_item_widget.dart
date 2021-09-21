@@ -30,7 +30,7 @@ class ListItemsWidget extends StatelessWidget {
     return Container(
       margin: EdgeInsetsDirectional.only(start: 8.w, end: 8.h),
       child: InkWell(
-        onTap: () => Get.toNamed('/details/0'),
+        onTap: () => Get.toNamed('/details/${item.id}'),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
