@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:mbocu_app/controller/home_controller.dart';
 import 'package:mbocu_app/themes/colors.dart';
 import 'package:mbocu_app/themes/text_styles.dart';
-import 'package:mbocu_app/views/widgets/list_items_widget.dart';
+import 'package:mbocu_app/views/widgets/list_item_widget.dart';
 import 'package:mbocu_app/views/widgets/modal_bottom_sheet_widget.dart';
 
 class HomePage extends StatefulWidget {
