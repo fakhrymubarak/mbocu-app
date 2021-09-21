@@ -9,25 +9,27 @@ class ItemDetailsController extends GetxController {
   String? itemId;
 
   MboccuDbApi _mboccuDbApi = MboccuDbApi();
-  Rx<ItemDetailsDto> itemDetails = new ItemDetailsDto().obs;
-
+  late Rx<ItemDetailsDto> itemDetails;
 
   @override
-  void onReady() {
-    _loadItemDetails();
-    super.onReady();
+  void onInit() {
+    itemDetails = new ItemDetailsDto().obs;
+    loadItemDetails();
+    super.onInit();
   }
 
-  void _loadItemDetails() async {
+  void loadItemDetails() async {
     try {
       itemId = Get.parameters['itemId'];
+      print(itemId);
       itemDetails.value = await _mboccuDbApi.getItemDetails(itemId!) ;
       itemDetails.refresh();
-      print(itemDetails.value.msg);
     } catch (e) {
       _showDialog(title: "Error", middleText: "Cannot load data");
     }
   }
+
+
 
   void _closeCurrentDialog() {
     if (Get.isDialogOpen!) {

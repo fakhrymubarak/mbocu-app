@@ -13,12 +13,12 @@ class ItemDetailsDto {
 
   String? status;
   String? msg;
-  List<Datum>? data;
+  List<ItemDetails>? data;
 
   factory ItemDetailsDto.fromJson(Map<String, dynamic> json) => ItemDetailsDto(
     status: json["status"],
     msg: json["msg"],
-    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+    data: List<ItemDetails>.from(json["data"].map((x) => ItemDetails.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -40,7 +40,7 @@ class Merchant {
     this.status,
     this.createdAt,
     this.updatedAt,
-    this.item,
+    this.listItem,
   });
 
   int? id;
@@ -53,7 +53,7 @@ class Merchant {
   String? status;
   DateTime? createdAt;
   DateTime? updatedAt;
-  List<Datum>? item;
+  List<ItemDetails>? listItem;
 
   factory Merchant.fromJson(Map<String, dynamic> json) => Merchant(
     id: json["id"],
@@ -66,7 +66,7 @@ class Merchant {
     status: json["status"],
     createdAt: DateTime.parse(json["created_at"]),
     updatedAt: DateTime.parse(json["updated_at"]),
-    item: List<Datum>.from(json["item"].map((x) => Datum.fromJson(x))),
+    listItem: List<ItemDetails>.from(json["item"].map((x) => ItemDetails.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -80,12 +80,12 @@ class Merchant {
     "status": status,
     "created_at": createdAt!.toIso8601String(),
     "updated_at": updatedAt!.toIso8601String(),
-    "item": List<dynamic>.from(item!.map((x) => x.toJson())),
+    "item": List<dynamic>.from(listItem!.map((x) => x.toJson())),
   };
 }
 
-class Datum {
-  Datum({
+class ItemDetails {
+  ItemDetails({
     this.id,
     this.icon,
     this.merchantId,
@@ -109,7 +109,7 @@ class Datum {
   DateTime? updatedAt;
   Merchant? merchant;
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory ItemDetails.fromJson(Map<String, dynamic> json) => ItemDetails(
     id: json["id"],
     icon: json["icon"],
     merchantId: json["merchant_id"],

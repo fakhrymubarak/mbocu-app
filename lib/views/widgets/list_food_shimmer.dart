@@ -21,7 +21,8 @@ class ListFoodShimmer extends StatelessWidget {
 
   Widget _itemWidget(int index) {
     return Container(
-      margin: EdgeInsetsDirectional.only(top: 8.w, bottom: 8.h),
+      margin: EdgeInsetsDirectional.only(
+          top: 8.h, bottom: 8.h, start: 16.w, end: 16.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
