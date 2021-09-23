@@ -23,3 +23,6 @@ TextStyle tsSmall = GoogleFonts.lato(
 
 TextStyle tsSmallBold = GoogleFonts.lato(
     fontSize: 12.sp, fontWeight: FontWeight.w700, color: colorBlack);
+
+TextStyle textHeader = GoogleFonts.montserrat(
+    color: colorPrimary, fontWeight: FontWeight.w600, fontSize: 40);
