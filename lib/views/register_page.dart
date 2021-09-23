@@ -3,8 +3,12 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:mbocu_app/themes/button_styles.dart';
 import 'package:mbocu_app/themes/text_styles.dart';
-import 'package:mbocu_app/themes/colors.dart';
+import 'package:mbocu_app/views/widgets/text_field_container_widget.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -17,106 +21,112 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xffFFFFFF),
-        body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(top: 76, right: 90, left: 117),
-                child: Text('Sign Up', style: textHeader),
-              ),
-              const SizedBox(height: 20),
-              const TextFieldContainer(
-                  child:
-                      TextField(decoration: InputDecoration(hintText: 'Name'))),
-              const SizedBox(
-                height: 20,
-              ),
-              const TextFieldContainer(
-                  child: TextField(
-                decoration: InputDecoration(hintText: 'Email'),
-              )),
-              const SizedBox(
-                height: 20,
-              ),
-              const TextFieldContainer(
-                  child: TextField(
-                      decoration: InputDecoration(hintText: 'Password'))),
-              const SizedBox(
-                height: 20,
-              ),
-              const TextFieldContainer(
-                  child: TextField(
-                decoration: InputDecoration(hintText: 'Repeat Password'),
-              )),
-              const Padding(
-                padding: EdgeInsets.only(top: 53, left: 20),
-                child: Text('sign up with social account',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    )),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              ElevatedButton(
-                style: raisedButtonStyle,
-                onPressed: () {},
-                child: const Text(
-                  'Create Account',
-                  style: TextStyle(
-                      color: Color(0x0fFFFFFF), fontWeight: FontWeight.bold),
+      backgroundColor: const Color(0xffFFFFFF),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(top: 100.h),
+              child: Text('Sign Up', style: tsTitle),
+            ),
+            const SizedBox(height: 50),
+            TextFieldContainer(
+              textField: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Name',
+                  border: InputBorder.none,
+                  hintStyle: tsLarge,
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 160, right: 37),
-                child: Row(
-                  children: const <Widget>[
-                    Text('Already have account?'),
-                    Text(
-                      'Log In',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    )
-                  ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextFieldContainer(
+              textField: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Email',
+                  border: InputBorder.none,
+                  hintStyle: tsLarge,
                 ),
-              )
-            ],
-          ),
-        ));
-  }
-}
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextFieldContainer(
+              textField: TextField(
 
-final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
-    onPrimary: colorPrimary,
-    primary: colorPrimary,
-    //maximumSize: const Size(58, 0),
-    minimumSize: const Size(258, 49),
-    padding: const EdgeInsets.only(top: 107),
-    shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(20))));
-
-class TextFieldContainer extends StatelessWidget {
-  const TextFieldContainer({Key? key, required TextField child})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(left: 53, right: 53),
-      padding: const EdgeInsets.symmetric(horizontal: 23, vertical: 5),
-      width: 305,
-      height: 44,
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: const [
-            BoxShadow(
-                color: Color(0xffFFCA61), blurRadius: 4, offset: Offset(0, 4))
-          ]),
+                obscureText: true,
+                decoration: InputDecoration(
+                  hintText: 'Password',
+                  border: InputBorder.none,
+                  hintStyle: tsLarge,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextFieldContainer(
+              textField: TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  hintText: 'Repeat Password',
+                  border: InputBorder.none,
+                  hintStyle: tsLarge,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextFieldContainer(
+              textField: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Phone Number',
+                  border: InputBorder.none,
+                  hintStyle: tsLarge,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              style: buttonPrimaryLarge,
+              onPressed: () {},
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(50.w, 10.h, 50.w, 10.h),
+                child: Text('Create Account', style: tsHeading1White),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Already have account? ',
+                  style: tsRegular,
+                ),
+                InkWell(
+                  onTap: () {
+                    Get.close(1);
+                    Get.toNamed('/login');
+                  },
+                  child: Text(
+                    'Log In',
+                    style: tsRegularBold,
+                  ),
+                )
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }

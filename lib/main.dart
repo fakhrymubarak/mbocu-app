@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         getPages: Routes.route,
-        initialRoute: '/home',
+        initialRoute: '/login',
         initialBinding: HomeBinding(),
         theme: ThemeData(
           primarySwatch: Colors.orange,
