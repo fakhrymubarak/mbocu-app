@@ -32,7 +32,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             const SizedBox(height: 50),
             TextFieldContainer(
-              textField: TextField(
+              textFormField: TextFormField(
                 decoration: InputDecoration(
                   hintText: 'Name',
                   border: InputBorder.none,
@@ -44,7 +44,7 @@ class _RegisterPageState extends State<RegisterPage> {
               height: 20,
             ),
             TextFieldContainer(
-              textField: TextField(
+              textFormField: TextFormField(
                 decoration: InputDecoration(
                   hintText: 'Email',
                   border: InputBorder.none,
@@ -56,8 +56,7 @@ class _RegisterPageState extends State<RegisterPage> {
               height: 20,
             ),
             TextFieldContainer(
-              textField: TextField(
-
+              textFormField: TextFormField(
                 obscureText: true,
                 decoration: InputDecoration(
                   hintText: 'Password',
@@ -70,7 +69,7 @@ class _RegisterPageState extends State<RegisterPage> {
               height: 20,
             ),
             TextFieldContainer(
-              textField: TextField(
+              textFormField: TextFormField(
                 obscureText: true,
                 decoration: InputDecoration(
                   hintText: 'Repeat Password',
@@ -83,7 +82,7 @@ class _RegisterPageState extends State<RegisterPage> {
               height: 20,
             ),
             TextFieldContainer(
-              textField: TextField(
+              textFormField: TextFormField(
                 decoration: InputDecoration(
                   hintText: 'Phone Number',
                   border: InputBorder.none,

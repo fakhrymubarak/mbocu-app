@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class TextFieldContainer extends StatelessWidget {
-  const TextFieldContainer({Key? key, required this.textField})
+  const TextFieldContainer({Key? key, required this.textFormField})
       : super(key: key);
 
-  final TextField textField;
+  final TextFormField textFormField;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class TextFieldContainer extends StatelessWidget {
               color: Color(0xffFFCA61), blurRadius: 4, offset: Offset(0, 4))
         ],
       ),
-      child: textField,
+      child: textFormField,
     );
   }
 }

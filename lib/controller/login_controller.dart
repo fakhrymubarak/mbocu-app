@@ -21,11 +21,12 @@ class LoginController extends GetxController {
 
   Future<void> _isLoginChecker() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (prefs.getBool("isLogin") == true && prefs.getString("accessToken") != null){
+    if (prefs.getBool("isLogin") == true &&
+        prefs.getString("accessToken") != null) {
+      Get.close(1);
       Get.toNamed("/home");
     }
   }
-
 
   Future<void> postLogin(String email, String password) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -37,6 +38,7 @@ class LoginController extends GetxController {
       if (userLoginValue.value.data!.accessToken != null) {
         prefs.setString("accessToken", userLoginValue.value.data!.accessToken!);
         prefs.setBool("isLogin", true);
+        Get.close(1);
         Get.toNamed("/home");
       } else {
         prefs.setBool("isLogin", false);
