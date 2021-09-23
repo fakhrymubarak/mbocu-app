@@ -3,9 +3,8 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mbocu_app/themes/text_styles.dart';
-import 'package:responsive_builder/responsive_builder.dart';
+import 'package:mbocu_app/themes/colors.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -17,104 +16,67 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-        BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width,
-            maxHeight: MediaQuery.of(context).size.height),
-        designSize: Size(375, 812));
-    return ScreenTypeLayout(
-      breakpoints: ScreenBreakpoints(desktop: 600, tablet: 950, watch: 300),
-      mobile: Scaffold(
-        backgroundColor: Color(0xffFFFFFF),
+    return Scaffold(
+        backgroundColor: const Color(0xffFFFFFF),
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(top: 76.w, right: 90.w, left: 117.w),
-                child: Text('Sign Up', style: tsRegular),
+                padding: const EdgeInsets.only(top: 76, right: 90, left: 117),
+                child: Text('Sign Up', style: textHeader),
               ),
-              SizedBox(
-                height: 20.w,
+              const SizedBox(height: 20),
+              const TextFieldContainer(
+                  child:
+                      TextField(decoration: InputDecoration(hintText: 'Name'))),
+              const SizedBox(
+                height: 20,
               ),
-              TextFieldContainer(
-                child: TextField(
-                  decoration: InputDecoration(hintText: 'Name'),
-                ),
+              const TextFieldContainer(
+                  child: TextField(
+                decoration: InputDecoration(hintText: 'Email'),
+              )),
+              const SizedBox(
+                height: 20,
               ),
-              SizedBox(
-                height: 20.w,
+              const TextFieldContainer(
+                  child: TextField(
+                      decoration: InputDecoration(hintText: 'Password'))),
+              const SizedBox(
+                height: 20,
               ),
-              TextFieldContainer(
-                child: TextField(
-                  decoration: InputDecoration(hintText: 'E-mail'),
-                ),
-              ),
-              SizedBox(
-                height: 20.w,
-              ),
-              TextFieldContainer(
-                child: TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(hintText: 'Password'),
-                ),
-              ),
-              SizedBox(
-                height: 20.w,
-              ),
-              TextFieldContainer(
-                child: TextField(
-                  decoration: InputDecoration(hintText: 'Repeat Password'),
-                ),
-              ),
-              Padding(
+              const TextFieldContainer(
+                  child: TextField(
+                decoration: InputDecoration(hintText: 'Repeat Password'),
+              )),
+              const Padding(
                 padding: EdgeInsets.only(top: 53, left: 20),
-                child: Text(
-                  'Sign up with social account',
+                child: Text('sign up with social account',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    )),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              ElevatedButton(
+                style: raisedButtonStyle,
+                onPressed: () {},
+                child: const Text(
+                  'Create Account',
                   style: TextStyle(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
+                      color: Color(0x0fFFFFFF), fontWeight: FontWeight.bold),
                 ),
+              ),
+              const SizedBox(
+                height: 10,
               ),
               Padding(
-                padding: EdgeInsets.only(top: 20),
+                padding: const EdgeInsets.only(left: 160, right: 37),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                      height: 45.w,
-                      width: 45.w,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage('assets/icons/gmail.png'),
-                              fit: BoxFit.cover),
-                          color: Colors.white),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                width: 258,
-                height: 50.w,
-                child: FlatButton(
-                  color: Color(0xffFFCA61),
-                  onPressed: () {},
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)),
-                  child: Text(
-                    'Create Account',
-                    style: TextStyle(color: Color(0xffFFFFFF), fontSize: 18.sp),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 17.w,
-                child: Row(
-                  children: [
-                    Text('Already have account? '),
-                    SizedBox(
-                      width: 10,
-                    ),
+                  children: const <Widget>[
+                    Text('Already have account?'),
                     Text(
                       'Log In',
                       style: TextStyle(fontWeight: FontWeight.bold),
@@ -124,31 +86,37 @@ class _RegisterPageState extends State<RegisterPage> {
               )
             ],
           ),
-        ),
-      ),
-    );
+        ));
   }
 }
 
-class TextFieldContainer extends StatelessWidget {
-  final Widget child;
+final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
+    onPrimary: colorPrimary,
+    primary: colorPrimary,
+    //maximumSize: const Size(58, 0),
+    minimumSize: const Size(258, 49),
+    padding: const EdgeInsets.only(top: 107),
+    shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(20))));
 
-  const TextFieldContainer({Key? key, required this.child}) : super(key: key);
+class TextFieldContainer extends StatelessWidget {
+  const TextFieldContainer({Key? key, required TextField child})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.only(left: 53, right: 53),
-      padding: EdgeInsets.symmetric(horizontal: 23, vertical: 5),
-      width: size.width * 0.8,
+      margin: const EdgeInsets.only(left: 53, right: 53),
+      padding: const EdgeInsets.symmetric(horizontal: 23, vertical: 5),
+      width: 305,
+      height: 44,
       decoration: BoxDecoration(
-          color: Color(0xffD4CCCC).withOpacity(0.2),
+          color: Colors.white,
           borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(color: Color(0xffFFCA61), blurRadius: 30, spreadRadius: 0)
+          boxShadow: const [
+            BoxShadow(
+                color: Color(0xffFFCA61), blurRadius: 4, offset: Offset(0, 4))
           ]),
-      child: child,
     );
   }
 }
