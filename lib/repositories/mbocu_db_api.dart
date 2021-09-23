@@ -3,25 +3,29 @@ import 'package:mbocu_app/const/constants.dart';
 import 'package:mbocu_app/models/ItemDetailsDTO.dart';
 import 'package:mbocu_app/models/ItemsByLocationDTO.dart';
 import 'package:mbocu_app/models/LoginDTO.dart';
+import 'package:mbocu_app/models/RegisterDTO.dart';
 
 class MbocuDbApi {
-
-  Future<LoginDto> postRegister(String email, String password) async {
-    var path = 'login';
+  Future<RegisterDto> postRegister(String name, String email, String pass,
+      String passConfirm, String phoneNum) async {
+    var path = 'register';
     var formData = FormData.fromMap({
+      'name': name,
       'email': email,
-      'password': password,
+      'password': pass,
+      'password_confirmation': passConfirm,
+      'phone_num': phoneNum,
     });
 
-    LoginDto output = LoginDto();
+    RegisterDto output = RegisterDto();
 
     try {
       Dio _dio = new Dio();
       Response response = await _dio.post(BASE_API + path, data: formData);
       if (response.statusCode == 200) {
-        output = LoginDto.fromJson(response.data);
-      }else if(response.statusCode == 401){
-        output = LoginDto.fromJson(response.data);
+        output = RegisterDto.fromJson(response.data);
+      } else if (response.statusCode == 403) {
+        output = RegisterDto.fromJson(response.data);
       }
     } catch (e) {
       print(e);
@@ -43,7 +47,7 @@ class MbocuDbApi {
       Response response = await _dio.post(BASE_API + path, data: formData);
       if (response.statusCode == 200) {
         output = LoginDto.fromJson(response.data);
-      }else if(response.statusCode == 401){
+      } else if (response.statusCode == 401) {
         output = LoginDto.fromJson(response.data);
       }
     } catch (e) {
