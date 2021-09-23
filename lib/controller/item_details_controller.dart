@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:mbocu_app/models/ItemDetailsDTO.dart';
 import 'package:mbocu_app/repositories/mbocu_db_api.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ItemDetailsController extends GetxController {
   String? itemId;
@@ -20,10 +21,15 @@ class ItemDetailsController extends GetxController {
 
   void loadItemDetails() async {
     try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
       itemId = Get.parameters['itemId'];
-      print(itemId);
-      itemDetails.value = await _mbocuDbApi.getItemDetails(itemId!) ;
-      itemDetails.refresh();
+      if(prefs.getString("accessToken") != null) {
+        String token = prefs.getString("accessToken")!;
+        itemDetails.value = await _mbocuDbApi.getItemDetails(itemId!, token) ;
+        itemDetails.refresh();
+      }else{
+        Get.toNamed("/login");
+      }
     } catch (e) {
       _showDialog(title: "Error", middleText: "Cannot load data");
     }

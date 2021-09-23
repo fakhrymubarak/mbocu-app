@@ -6,6 +6,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:mbocu_app/models/ItemsByLocationDTO.dart';
 import 'package:mbocu_app/repositories/mbocu_db_api.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeController extends GetxController {
   String locationName = "Tugu Yogyakarta";
@@ -53,8 +54,14 @@ class HomeController extends GetxController {
 
   Future<void> _loadItemsByLocation() async{
     try {
-      itemsByLocation.value = await _mbocuDbApi.getItemsByLocation('110.416664', '-6.966667');
-      itemsByLocation.refresh();
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      if(prefs.getString("accessToken") != null) {
+        String token = prefs.getString("accessToken")!;
+        itemsByLocation.value = await _mbocuDbApi.getItemsByLocation('110.416664', '-6.966667', token);
+        itemsByLocation.refresh();
+      }else{
+        Get.toNamed("/login");
+      }
     } catch (e) {
       printError(info: e.toString());
     }

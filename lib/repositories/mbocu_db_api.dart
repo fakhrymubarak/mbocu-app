@@ -56,9 +56,9 @@ class MbocuDbApi {
     return output;
   }
 
-  Future<ItemsByLocationDto> getItemsByLocation(String long, String lat) async {
+  Future<ItemsByLocationDto> getItemsByLocation(String long, String lat, String token) async {
     var path = 'itemloc';
-    var token = '4|sZXTqzFP4K7In5s6YPRp0jheGA7TyErO4ytlG7KB';
+    var accessToken = token;
     var formData = FormData.fromMap({
       'long': long,
       'lat': lat,
@@ -68,7 +68,7 @@ class MbocuDbApi {
 
     try {
       Dio _dio = new Dio();
-      _dio.options.headers["authorization"] = "Bearer " + token;
+      _dio.options.headers["authorization"] = "Bearer " + accessToken;
       Response response = await _dio.post(BASE_API + path, data: formData);
       if (response.statusCode == 200) {
         output = ItemsByLocationDto.fromJson(response.data);
@@ -79,9 +79,9 @@ class MbocuDbApi {
     return output;
   }
 
-  Future<ItemDetailsDto> getItemDetails(String itemId) async {
+  Future<ItemDetailsDto> getItemDetails(String itemId, String token) async {
     var path = 'itemlocdet';
-    var token = '4|sZXTqzFP4K7In5s6YPRp0jheGA7TyErO4ytlG7KB';
+    var accessToken = token;
     var formData = FormData.fromMap({
       'id': itemId,
     });
@@ -90,7 +90,7 @@ class MbocuDbApi {
 
     try {
       Dio _dio = new Dio();
-      _dio.options.headers["authorization"] = "Bearer " + token;
+      _dio.options.headers["authorization"] = "Bearer " + accessToken;
       Response response = await _dio.post(BASE_API + path, data: formData);
       if (response.statusCode == 200) {
         output = ItemDetailsDto.fromJson(response.data);
