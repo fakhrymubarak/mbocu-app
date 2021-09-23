@@ -2,8 +2,32 @@ import 'package:dio/dio.dart';
 import 'package:mbocu_app/const/constants.dart';
 import 'package:mbocu_app/models/ItemDetailsDTO.dart';
 import 'package:mbocu_app/models/ItemsByLocationDTO.dart';
+import 'package:mbocu_app/models/LoginDTO.dart';
 
 class MboccuDbApi {
+
+  Future<LoginDto> postLogin(String email, String password) async {
+    var path = 'login';
+    var formData = FormData.fromMap({
+      'email': email,
+      'password': password,
+    });
+
+    LoginDto output = LoginDto();
+
+    try {
+      Dio _dio = new Dio();
+      Response response = await _dio.post(BASE_API + path, data: formData);
+      if (response.statusCode == 200) {
+        output = LoginDto.fromJson(response.data);
+      }else if(response.statusCode == 401){
+        output = LoginDto.fromJson(response.data);
+      }
+    } catch (e) {
+      print(e);
+    }
+    return output;
+  }
 
   Future<ItemsByLocationDto> getItemsByLocation(String long, String lat) async {
     var path = 'itemloc';
