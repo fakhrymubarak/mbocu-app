@@ -5,13 +5,13 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:mbocu_app/models/ItemsByLocationDTO.dart';
-import 'package:mbocu_app/repositories/mboccu_db_api.dart';
+import 'package:mbocu_app/repositories/mbocu_db_api.dart';
 
 class HomeController extends GetxController {
   String locationName = "Tugu Yogyakarta";
   CameraPosition? _kCurrLoc;
 
-  MboccuDbApi _mboccuDbApi = MboccuDbApi();
+  MbocuDbApi _mbocuDbApi = MbocuDbApi();
   Rx<ItemsByLocationDto> itemsByLocation = new ItemsByLocationDto().obs;
 
   @override
@@ -53,7 +53,7 @@ class HomeController extends GetxController {
 
   Future<void> _loadItemsByLocation() async{
     try {
-      itemsByLocation.value = await _mboccuDbApi.getItemsByLocation('110.416664', '-6.966667');
+      itemsByLocation.value = await _mbocuDbApi.getItemsByLocation('110.416664', '-6.966667');
       itemsByLocation.refresh();
     } catch (e) {
       printError(info: e.toString());

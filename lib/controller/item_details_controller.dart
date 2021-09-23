@@ -3,12 +3,12 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:mbocu_app/models/ItemDetailsDTO.dart';
-import 'package:mbocu_app/repositories/mboccu_db_api.dart';
+import 'package:mbocu_app/repositories/mbocu_db_api.dart';
 
 class ItemDetailsController extends GetxController {
   String? itemId;
 
-  MboccuDbApi _mboccuDbApi = MboccuDbApi();
+  MbocuDbApi _mbocuDbApi = MbocuDbApi();
   late Rx<ItemDetailsDto> itemDetails;
 
   @override
@@ -22,7 +22,7 @@ class ItemDetailsController extends GetxController {
     try {
       itemId = Get.parameters['itemId'];
       print(itemId);
-      itemDetails.value = await _mboccuDbApi.getItemDetails(itemId!) ;
+      itemDetails.value = await _mbocuDbApi.getItemDetails(itemId!) ;
       itemDetails.refresh();
     } catch (e) {
       _showDialog(title: "Error", middleText: "Cannot load data");
