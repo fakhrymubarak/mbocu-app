@@ -18,7 +18,13 @@ class RegisterController extends GetxController {
     try {
       userRegisterValue.value = await _mbocuDbApi.postRegister(name, email, pass, passConfirm, phoneNum);
       userRegisterValue.refresh();
+      if(userRegisterValue.value.status == null){
+        userRegisterValue.value.status = "401";
+        userRegisterValue.refresh();
+      }
     } catch (e) {
+      userRegisterValue.value.status = "401";
+      userRegisterValue.refresh();
       printError(info: e.toString());
     }
   }

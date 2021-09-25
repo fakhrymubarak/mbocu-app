@@ -24,7 +24,7 @@ class MbocuDbApi {
       Response response = await _dio.post(BASE_API + path, data: formData);
       if (response.statusCode == 200) {
         output = RegisterDto.fromJson(response.data);
-      } else if (response.statusCode == 403) {
+      } else if (response.statusCode == 500) {
         output = RegisterDto.fromJson(response.data);
       }
     } catch (e) {
@@ -56,7 +56,8 @@ class MbocuDbApi {
     return output;
   }
 
-  Future<ItemsByLocationDto> getItemsByLocation(String long, String lat, String token) async {
+  Future<ItemsByLocationDto> getItemsByLocation(
+      String long, String lat, String token) async {
     var path = 'itemloc';
     var accessToken = token;
     var formData = FormData.fromMap({

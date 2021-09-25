@@ -91,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                         .hasMatch(emailController.text)) &&
                     emailController.text.isNotEmpty) {
-                  return "Email tidak sesuai!";
+                  return "Format email salah";
                 }
                 return null;
               },
@@ -109,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
             textFormField: TextFormField(
               controller: passwordController,
               validator: (text) {
-                if (!(passwordController.text.length > 8) &&
+                if (!(passwordController.text.length >= 8) &&
                     passwordController.text.isNotEmpty) {
                   return "Password minimal 8 karakter";
                 }
@@ -132,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
             style: tsLarge,
           ),
           const SizedBox(height: 25),
-          Obx(() => showErrorLogin(_controller.userLoginValue.value.status)),
+          Obx(() => _showErrorLogin(_controller.userLoginValue.value.status)),
           ElevatedButton(
             style: buttonPrimaryLarge,
             onPressed: () {
@@ -151,8 +151,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  showErrorLogin(String? status) {
-    print("status = $status");
+  _showErrorLogin(String? status) {
     if (status == '401') {
       return Column(
         children: [

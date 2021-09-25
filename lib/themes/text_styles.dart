@@ -21,6 +21,9 @@ TextStyle tsLarge = GoogleFonts.lato(
 TextStyle tsLargeDanger = GoogleFonts.lato(
     fontSize: 16.sp, fontWeight: FontWeight.w400, color: colorDanger);
 
+TextStyle tsLargeSucess = GoogleFonts.lato(
+    fontSize: 16.sp, fontWeight: FontWeight.w400, color: colorSuccess);
+
 TextStyle tsRegular = GoogleFonts.lato(
     fontSize: 14.sp, fontWeight: FontWeight.w400, color: colorBlack);
 

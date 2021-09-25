@@ -19,7 +19,6 @@ class LoginController extends GetxController {
     try {
       userLoginValue.value = await _mbocuDbApi.postLogin(email, password);
       userLoginValue.refresh();
-
       if (userLoginValue.value.data!.accessToken != null) {
         prefs.setString("accessToken", userLoginValue.value.data!.accessToken!);
         prefs.setBool("isLogin", true);
