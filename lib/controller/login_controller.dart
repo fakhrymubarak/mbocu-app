@@ -29,6 +29,8 @@ class LoginController extends GetxController {
         prefs.setBool("isLogin", false);
       }
     } catch (e) {
+      userLoginValue.value.status = "401";
+      userLoginValue.refresh();
       printError(info: e.toString());
     }
   }

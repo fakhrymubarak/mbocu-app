@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:mbocu_app/controller/login_controller.dart';
 import 'package:mbocu_app/themes/button_styles.dart';
 import 'package:mbocu_app/themes/text_styles.dart';
@@ -130,9 +131,8 @@ class _LoginPageState extends State<LoginPage> {
             textAlign: TextAlign.right,
             style: tsLarge,
           ),
-          const SizedBox(
-            height: 25,
-          ),
+          const SizedBox(height: 25),
+          Obx(() => showErrorLogin(_controller.userLoginValue.value.status)),
           ElevatedButton(
             style: buttonPrimaryLarge,
             onPressed: () {
@@ -149,5 +149,24 @@ class _LoginPageState extends State<LoginPage> {
         ],
       ),
     );
+  }
+
+  showErrorLogin(String? status) {
+    print("status = $status");
+    if (status == '401') {
+      return Column(
+        children: [
+          Text(
+            'Email atau password salah!',
+            textAlign: TextAlign.right,
+            style: tsLargeDanger,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+        ],
+      );
+    }
+    return SizedBox(height: 0);
   }
 }
