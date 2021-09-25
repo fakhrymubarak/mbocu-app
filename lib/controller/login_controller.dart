@@ -9,23 +9,8 @@ class LoginController extends GetxController {
   Rx<LoginDto> userLoginValue = new LoginDto().obs;
 
   @override
-  void onInit() {
-    _isLoginChecker();
-    super.onInit();
-  }
-
-  @override
   void onReady() {
     super.onReady();
-  }
-
-  Future<void> _isLoginChecker() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (prefs.getBool("isLogin") == true &&
-        prefs.getString("accessToken") != null) {
-      Get.close(1);
-      Get.toNamed("/home");
-    }
   }
 
   Future<void> postLogin(String email, String password) async {

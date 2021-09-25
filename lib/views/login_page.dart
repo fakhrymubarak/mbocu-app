@@ -110,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
               validator: (text) {
                 if (!(passwordController.text.length > 8) &&
                     passwordController.text.isNotEmpty) {
-                  return "Password harus lebih dari 8 karakter";
+                  return "Password minimal 8 karakter";
                 }
                 return null;
               },

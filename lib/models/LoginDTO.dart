@@ -1,8 +1,12 @@
+// To parse this JSON data, do
+//
+//     final loginDto = loginDtoFromJson(jsonString);
+
 import 'dart:convert';
 
-LoginDto itemDetailsDtoFromJson(String str) => LoginDto.fromJson(json.decode(str));
+LoginDto loginDtoFromJson(String str) => LoginDto.fromJson(json.decode(str));
 
-String itemDetailsDtoToJson(LoginDto data) => json.encode(data.toJson());
+String loginDtoToJson(LoginDto data) => json.encode(data.toJson());
 
 class LoginDto {
   LoginDto({
@@ -13,12 +17,12 @@ class LoginDto {
 
   String? status;
   String? msg;
-  Data? data;
+  LoginDtoData? data;
 
   factory LoginDto.fromJson(Map<String, dynamic> json) => LoginDto(
     status: json["status"],
     msg: json["msg"],
-    data: Data.fromJson(json["data"]),
+    data: LoginDtoData.fromJson(json["data"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -28,28 +32,28 @@ class LoginDto {
   };
 }
 
-class Data {
-  Data({
-    this.user,
+class LoginDtoData {
+  LoginDtoData({
+    this.data,
     this.accessToken,
   });
 
-  User? user;
+  UserData? data;
   String? accessToken;
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-    user: User.fromJson(json["user"]),
+  factory LoginDtoData.fromJson(Map<String, dynamic> json) => LoginDtoData(
+    data: UserData.fromJson(json["data"]),
     accessToken: json["access_token"],
   );
 
   Map<String, dynamic> toJson() => {
-    "user": user!.toJson(),
+    "data": data!.toJson(),
     "access_token": accessToken,
   };
 }
 
-class User {
-  User({
+class UserData {
+  UserData({
     required this.id,
     this.photoProfile,
     this.name,
@@ -77,7 +81,7 @@ class User {
   DateTime? createdAt;
   DateTime? updatedAt;
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
+  factory UserData.fromJson(Map<String, dynamic> json) => UserData(
     id: json["id"],
     photoProfile: json["photo_profile"],
     name: json["name"],
